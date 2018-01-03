@@ -28,10 +28,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) # set date when object is created
     modified_at = models.DateTimeField(auto_now=True)  # saves the date when the object is updated
 
-    # relacionando con las categorias
-    # comportamientos
-    # CASCADE -> Cascade deletes. Django emulates the behavior of the SQL constraint ON DELETE CASCADE and also deletes the object containing the ForeignKey.
-    # PROTECT -> Prevent deletion of the referenced object by raising ProtectedError, a subclass of django.db.IntegrityError.
     category = models.ManyToManyField(Category)
 
     def __str__(self):
