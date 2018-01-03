@@ -107,3 +107,8 @@ venv.bak/
 
 # pycharm
 .idea/
+
+# sqlite
+db.sqlite3
+
+**/*.DS_Store
