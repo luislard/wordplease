@@ -8,8 +8,8 @@ from posts.models import Post
 
 @login_required
 def home(request):
-    latest_posts = Post.objects.all().order_by('-published_date')
-    context = { 'posts': latest_posts[:10] }
+    latest_posts = Post.objects.all().order_by('-publication_date')
+    context = { 'object_list': latest_posts[:10] }
     return render(request, "home.html", context)
 
 
