@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, logout
 from django.urls import path
 
-from posts.views import MyPostsView, home
+from posts.views import MyPostsView, PostsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,5 @@ urlpatterns = [
     # path('posts/crear', CreateMovieView.as_view(), name="create_movie_page"),
     # path('pelis/<int:pk>', movie_detail, name="movie_detail_page"),
     path('posts/', MyPostsView.as_view(), name='my_posts_page'),
-    path('', home, name="home_page"),
+    path('', PostsView.as_view(), name="home_page"),
 ]

@@ -2,15 +2,26 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+import datetime
 
 from posts.models import Post
 
 
-@login_required
-def home(request):
-    latest_posts = Post.objects.all().order_by('-publication_date')
-    context = { 'object_list': latest_posts[:10] }
-    return render(request, "home.html", context)
+class PostsView(ListView):
+    model = Post
+    template_name = "my_posts.html"
+
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        queryset = super(PostsView, self).get_queryset()
+        return queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
+
+
+#@login_required
+#def home(request):
+#    latest_posts = Post.objects.all().order_by('-publication_date')
+#    context = { 'object_list': latest_posts[:9] }
+#    return render(request, "home.html", context)
 
 
 class MyPostsView(LoginRequiredMixin,ListView):
