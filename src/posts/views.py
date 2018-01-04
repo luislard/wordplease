@@ -9,12 +9,12 @@ from posts.models import Post
 
 class PostsView(ListView):
     model = Post
-    template_name = "my_posts.html"
+    template_name = "home.html"
 
     def get_queryset(self):
         now = datetime.datetime.now()
         queryset = super(PostsView, self).get_queryset()
-        return queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
+        return queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d")).order_by('-publication_date')
 
 
 #@login_required
@@ -30,4 +30,4 @@ class MyPostsView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         queryset = super(MyPostsView, self).get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(user=self.request.user).order_by('-created_at')

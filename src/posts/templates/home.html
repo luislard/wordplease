@@ -2,7 +2,11 @@
 
 {% block head_title %} My Posts {% endblock %}
 {% block content %}
-
-    {% include 'posts_list.html' with posts=object_list %}
-
+<div class="container">
+    <h1>All Posts</h1>
+    <hr>
+    <div class="row">
+        {% include 'posts_list.html' with posts=object_list %}
+    </div>
+</div>
 {% endblock %}

@@ -1,13 +1,20 @@
 {% for post in posts %}
 
-    <div class="row">
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.publication_date }}</p>
-        <div class="row">
-            <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid">
-        </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="border border-primary">
 
-        <p>{{ post.summary }}</p>
+
+            <h2>{{ post.title }}</h2>
+            <p>Published at: {{ post.publication_date|date }}</p>
+            {% if request.user == post.user %}
+                <p>Created at: {{ post.publication_date|date }}</p>
+            {% endif %}
+
+                <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid">
+
+            <h3>Summary</h3>
+            <p>{{ post.summary|truncatechars:50 }}</p>
+        </div>
     </div>
 
 
