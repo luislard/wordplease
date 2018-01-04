@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Post Detail {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% include 'post_detail.html' with post=object %}
+    </div>
+</div>
+{% endblock %}

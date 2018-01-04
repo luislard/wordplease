@@ -1,0 +1,14 @@
+<div class="col-xs-12">
+    <div class="border border-danger">
+        <h1>{{ post.title }}</h1>
+        <p>Published at: {{ post.publication_date|date }}</p>
+        {% if request.user == post.user %}
+            <p>Created at: {{ post.created_at|date }}</p>
+        {% endif %}
+
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid">
+
+        <h3>Summary</h3>
+        <p>{{ post.body }}</p>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -52,3 +52,13 @@ class UserPostView(LoginRequiredMixin,ListView):
         return context
 
 
+class UserPostDetailView(DetailView):
+    model = Post
+    template_name = "post.html"
+
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        queryset = super(UserPostDetailView, self).get_queryset()
+        username = self.kwargs.get("username")
+        user = get_object_or_404(User, username__iexact=username)
+        return queryset.filter(user=user, publication_date__lte=now.strftime("%Y-%m-%d")).order_by('-publication_date')
