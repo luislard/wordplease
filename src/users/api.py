@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -32,7 +33,7 @@ class UserListAPI(APIView):
 
 
 class UserDetailAPI(APIView):
-
+    authentication_classes = (TokenAuthentication,)
     permission_classes = [UsersPermission]
 
     def get(self, request, pk):
