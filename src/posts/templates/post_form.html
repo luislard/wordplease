@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Create post {% endblock %}
+{% block content %}
+
+    <h1>Create Post</h1>
+
+{% if messages %}
+{% for message in messages %}
+    {% autoescape off %}
+    <div class="aler alert-success">{{ message }}</div>
+    {% endautoescape %}
+{% endfor %}
+
+{% endif %}
+
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Post</button>
+    </form>
+
+{% endblock %}

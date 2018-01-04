@@ -1,10 +1,14 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
+from django.views import View
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.urls import reverse
 import datetime
 
+from posts.forms import PostForm
 from posts.models import Post
 
 
@@ -62,3 +66,23 @@ class UserPostDetailView(DetailView):
         username = self.kwargs.get("username")
         user = get_object_or_404(User, username__iexact=username)
         return queryset.filter(user=user, publication_date__lte=now.strftime("%Y-%m-%d")).order_by('-publication_date')
+
+
+class CreatePostView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        form = PostForm()
+        return render(request,'post_form.html', {'form': form})
+
+    def post(self, request):
+        post = Post()
+        post.user = request.user # asignamos a la pelicula el usuario autenticado
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save()
+            form = PostForm()
+            url = reverse('post_detail_page', args=[post.user.username,post.pk])
+            message = "Post created succesfully! "
+            message += '<a href="{0}">View</a>'.format(url)
+            messages.success(request,message)
+        return render(request,'post_form.html', {'form': form})
