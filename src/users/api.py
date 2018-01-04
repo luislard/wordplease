@@ -37,7 +37,7 @@ class UserDetailAPI(APIView):
     permission_classes = [UsersPermission]
 
     def get(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(User, username=pk)
         self.check_object_permissions(request, user)
         serializer = UserSerializer(user)
         return Response(serializer.data)

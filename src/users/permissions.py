@@ -24,7 +24,6 @@ class UsersPermission(BasePermission):
         if request.user.is_authenticated and (request.method == "PUT" or request.method == "DELETE"):
             return True
 
-
     def has_object_permission(self, request, view, obj):
         """
         El usuario autenticado (request.user) solo puede trabajar con el usuario solicitado (obj) si es él mismo o es un admin
