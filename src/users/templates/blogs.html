@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Wordplease: Login {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1>All blogs</h1>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% include 'blogs_list.html' with users=object_list %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

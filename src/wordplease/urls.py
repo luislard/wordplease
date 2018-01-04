@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from posts.views import MyPostsView, PostsView
-from users.views import logout, LoginView
+from users.views import logout, LoginView, UsersView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +29,7 @@ urlpatterns = [
     # path('pelis/<int:pk>', movie_detail, name="movie_detail_page"),
     path('posts/', MyPostsView.as_view(), name='my_posts_page'),
     path('', PostsView.as_view(), name="home_page"),
+
+    path('blogs/', UsersView.as_view(), name='blogs_page'),
+
 ]
