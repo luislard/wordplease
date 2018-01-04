@@ -20,7 +20,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     summary = models.TextField()
     body = models.TextField()
-    publication_date = models.DateField()
+    publication_date = models.DateTimeField()
     image = models.URLField(blank=True)
     video = models.URLField(blank=True)
 
