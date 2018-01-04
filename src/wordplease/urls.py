@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from posts.views import MyPostsView, PostsView, UserPostView, UserPostDetailView, CreatePostView
-from users.views import logout, LoginView, UsersView
+from users.views import logout, LoginView, UsersView, SignupView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('login', LoginView.as_view(), name="login_page"),
     path('logout', logout, name="logout_page"),
+    path('signup', SignupView.as_view(), name="signup_page"),
 
     # path('posts/crear', CreateMovieView.as_view(), name="create_movie_page"),
     # path('pelis/<int:pk>', movie_detail, name="movie_detail_page"),

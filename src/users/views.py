@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView
 
-from users.forms import LoginForm
+from users.forms import LoginForm, SignUpForm
 
 
 class LoginView(View):
@@ -42,3 +42,19 @@ class UsersView(ListView):
     def get_queryset(self):
         queryset = super(UsersView, self).get_queryset()
         return queryset.order_by('username')
+
+
+class SignupView(View):
+    def get(self, request, *args, **kwargs):
+        form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
+
+    def post(self,request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            authenticated_user = authenticate(username=username, password=raw_password)
+            django_login(request, authenticated_user)
+            return redirect('home_page')
