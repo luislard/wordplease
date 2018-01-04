@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -42,7 +42,7 @@ class UserPostView(LoginRequiredMixin,ListView):
         now = datetime.datetime.now()
         queryset = super(UserPostView, self).get_queryset()
         username = self.kwargs.get("username")
-        user = User.objects.get(username=username)
+        user = get_object_or_404(User, username__iexact=username)
         return queryset.filter(user=user, publication_date__lte=now.strftime("%Y-%m-%d")).order_by('-publication_date')
 
     def get_context_data(self, **kwargs):
