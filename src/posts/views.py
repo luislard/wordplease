@@ -31,3 +31,5 @@ class MyPostsView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         queryset = super(MyPostsView, self).get_queryset()
         return queryset.filter(user=self.request.user).order_by('-created_at')
+
+
