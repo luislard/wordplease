@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -31,5 +32,23 @@ class MyPostsView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         queryset = super(MyPostsView, self).get_queryset()
         return queryset.filter(user=self.request.user).order_by('-created_at')
+
+
+class UserPostView(LoginRequiredMixin,ListView):
+    model = Post
+    template_name = "user_posts.html"
+
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        queryset = super(UserPostView, self).get_queryset()
+        username = self.kwargs.get("username")
+        user = User.objects.get(username=username)
+        return queryset.filter(user=user, publication_date__lte=now.strftime("%Y-%m-%d")).order_by('-publication_date')
+
+    def get_context_data(self, **kwargs):
+        username = self.kwargs.get("username")
+        context = super().get_context_data(**kwargs)
+        context['username'] = username
+        return context
 
 
