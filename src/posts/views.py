@@ -11,7 +11,6 @@ import datetime
 from posts.forms import PostForm
 from posts.models import Post
 
-
 class PostsView(ListView):
     model = Post
     template_name = "home.html"

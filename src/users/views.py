@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView
+from rest_framework.authtoken.models import Token
 
 from users.forms import LoginForm, SignUpForm
 
@@ -56,5 +57,6 @@ class SignupView(View):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             authenticated_user = authenticate(username=username, password=raw_password)
+            #Token.objects.create(user=authenticated_user) # creates a token for the user
             django_login(request, authenticated_user)
             return redirect('home_page')

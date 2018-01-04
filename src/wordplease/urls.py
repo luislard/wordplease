@@ -19,6 +19,7 @@ from django.urls import path
 from posts.views import MyPostsView, PostsView, UserPostView, UserPostDetailView, CreatePostView
 from users.api import UserListAPI
 from users.views import logout, LoginView, UsersView, SignupView
+from rest_framework.authtoken import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,5 +40,6 @@ urlpatterns = [
 
     # API REST
     path('api/1.0/users/', UserListAPI.as_view(), name="api_users_list"),
+    path('api/1.0/users/get-token/', views.obtain_auth_token, name="api_obtain_token")
 
 ]
