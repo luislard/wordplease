@@ -22,7 +22,7 @@ With some Body like:
 
 ### How to get user Token
 
-**Note: You need to be register in the application**
+**Note: The user need to be registered in the application**
 
 To get your token you need to do a **POST** request with the following body:
 
