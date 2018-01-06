@@ -42,7 +42,7 @@ To get your token you need to do a **POST** request with the following body:
 
 [http://localhost:8000/api/1.0/blogs/\<username\>](http://localhost:8000/api/1.0/blogs/luis "User Blog")
 
-#### How to search for a post within a blog
+### How to search for a post within a blog
 
 **The following query_params are allowed:**
 * **search:** This will allow you to look in the **title OR body** fields of posts.
