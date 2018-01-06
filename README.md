@@ -1,4 +1,4 @@
-# wordplease
+# Wordplease
 
 ## API usage
 
@@ -28,6 +28,15 @@
  [http://localhost:8000/api/1.0/blogs/\<username\>?body=wanted_word&title=wanted_word2](http://localhost:8000/api/1.0/blogs/luis?body=wanted_word&title=wanted_word2 "User's Blog posts with the word wanted_word in the body and wanted_word2 in title")
 
 **Note:** Body or title query_params will have priority over search query_param.
+
+### How to order the posts
+
+Simply add the query_param **order_by**. The possible values are:
+
+* **title**, will return results in ascending order.
+* **publication_date**, will return results in ascending order.
+* **-title**, will return results in descending order.
+* **-publication_date**, will return results in descending order.
 
 
 

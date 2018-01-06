@@ -75,25 +75,38 @@ class BlogUserListAPI(ListAPIView):
     authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
+        # Getting all posts
         queryset = Post.objects.all()
+
+        # Filtering acording kwargs
         username_arg = self.kwargs.get('username')
         queryset = queryset.filter(user__username=username_arg)
         search = self.request.query_params.get('search', None)
         title = self.request.query_params.get('title', None)
         body = self.request.query_params.get('body', None)
+
         if search != None and title == None and body == None:
             queryset = queryset.filter(Q(title__icontains=search) | Q(body__icontains=search))
         if title != None:
             queryset = queryset.filter(title__icontains=title)
         if body != None:
             queryset = queryset.filter(body__icontains=body)
+
         queryset = queryset.filter()
-        if self.request.user.is_authenticated and (self.request.user.username == username_arg or self.request.user.is_superuser):
-            return queryset
-        else:
+        if not (self.request.user.is_authenticated and (self.request.user.username == username_arg or self.request.user.is_superuser)):
             now = datetime.datetime.now()
             queryset = queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
-            return queryset
+
+        # Ordering
+        order_by = self.request.query_params.get('order_by', None)
+        available_order_by = ['title','-title','publication_date', '-publication_date']
+
+        if order_by in available_order_by:
+            queryset = queryset.order_by(order_by)
+        else:
+            queryset = queryset.order_by('-publication_date')
+
+        return queryset
 
 
     serializer_class = PostListSerializer
