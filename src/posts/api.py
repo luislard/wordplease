@@ -36,7 +36,7 @@ class PostsListAPI(ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 class PostDetailAPI(RetrieveUpdateDestroyAPIView):
-
+    authentication_classes = (TokenAuthentication,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [PostPermission]

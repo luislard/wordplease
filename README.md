@@ -112,3 +112,7 @@ Then you need to perform the request
 
 **POST** [http://localhost:8000/api/1.0/posts/](http://localhost:8000/api/1.0/posts/)
 
+
+### How to retreive the detail of a post
+If you are authenticated you will see unpublished post if you are a superuser or if your tokens belongs to the post owner
+**GET** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
