@@ -8,7 +8,7 @@
 
 ### Getting posts from user blog
 
-[http://localhost:8000/api/1.0/blogs/<username>](http://localhost:8000/api/1.0/blogs/luis "User Blog")
+[http://localhost:8000/api/1.0/blogs/\<username\>](http://localhost:8000/api/1.0/blogs/luis "User Blog")
 
 #### How to search for a post within a blog
 
