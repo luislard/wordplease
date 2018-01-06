@@ -11,7 +11,7 @@ from users.serializers import UserSerializer, UserListSerializer
 
 
 class UserListAPI(APIView):
-
+    authentication_classes = (TokenAuthentication,)
     permission_classes = [UsersPermission]
 
     def get(self, request):

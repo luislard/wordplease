@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from django.urls import reverse
 
 
 class UserListSerializer(serializers.Serializer):
@@ -8,6 +9,23 @@ class UserListSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
+
+
+class BlogListSerializer(serializers.ModelSerializer):
+
+    blog_url = serializers.SerializerMethodField('build_blog_url')
+
+    def build_blog_url(self, obj):
+        return reverse("api_blogs_user_list", kwargs={'username':obj.username})
+
+    class Meta:
+        model = User
+        fields = ['username','blog_url']
+
+
+
+
+
 
 class UserSerializer(UserListSerializer):
     id = serializers.ReadOnlyField()
