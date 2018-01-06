@@ -27,7 +27,7 @@
 * Look for posts in username's blog containing case insensitive "wanted_word" in body and "wanted_word2" in title.
  [http://localhost:8000/api/1.0/blogs/\<username\>?body=wanted_word&title=wanted_word2](http://localhost:8000/api/1.0/blogs/luis?body=wanted_word&title=wanted_word2 "User's Blog posts with the word wanted_word in the body and wanted_word2 in title")
 
-**Note:** Body or title lookup will have priority over search.
+**Note:** Body or title query_params will have priority over search query_param.
 
 
 
