@@ -2,6 +2,38 @@
 
 ## API usage
 
+**Note: Some endpoints require authentication.**
+
+### How to register an user
+
+First register yourself in the application using the following route:
+**POST** [http://localhost:8000/api/1.0/users/](http://localhost:8000/api/1.0/users/)
+
+With some Body like:
+```json
+{
+    "username": "pablito",
+    "email": "mail@mail.com",
+    "first_name": "Pablito",
+    "last_name": "Perez",
+    "password":"supersegura"
+}
+```
+
+### How to get user Token
+
+**Note: You need to be register in the application**
+
+To get your token you need to do a **POST** request with the following body:
+
+**POST** [http://localhost:8000/api/1.0/users/get-token/](http://localhost:8000/api/1.0/users/get-token/ "Get user Token")
+```json
+{
+    "username": "pablito",
+    "password":"supersegura"
+}
+```
+
 ### Getting available blogs
 
 [http://localhost:8000/api/1.0/blogs/](http://localhost:8000/api/1.0/blogs/ "All Blogs")
@@ -75,4 +107,8 @@ Or
     "category":[1,2]
 }
 ```
+
+Then you need to perform the request
+
+**POST** [http://localhost:8000/api/1.0/posts/](http://localhost:8000/api/1.0/posts/)
 
