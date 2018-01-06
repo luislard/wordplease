@@ -31,12 +31,15 @@
 
 ### How to order the posts
 
-Simply add the query_param **order_by**. The possible values are:
+Simply add the query_param **order_by**. Possible values are:
 
 * **title**, will return results in ascending order.
 * **publication_date**, will return results in ascending order.
 * **-title**, will return results in descending order.
 * **-publication_date**, will return results in descending order.
+
+**Example:**
+[http://localhost:8000/api/1.0/blogs/\<username\>?order_by=title](http://localhost:8000/api/1.0/blogs/luis?order_by=title "User's Blog posts sorted by title in ascending order")
 
 
 
