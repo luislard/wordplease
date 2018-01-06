@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
@@ -50,9 +50,6 @@ class PostDetailAPI(RetrieveUpdateDestroyAPIView):
 
 class BlogListAPI(APIView):
 
-    #authentication_classes = (TokenAuthentication,)
-    #permission_classes = [UsersPermission]
-
     def get(self, request):
         users = User.objects.all()
         query_params = request.query_params
@@ -72,14 +69,32 @@ class BlogListAPI(APIView):
         return paginator.get_paginated_response(serializer.data)
 
 
-class BlogUserListAPI(APIView):
+class BlogUserListAPI(ListAPIView):
 
     authentication_classes = (TokenAuthentication,)
-    permission_classes = [UsersPermission]
 
-    def get(self, request):
-        users = User.objects.all()
-        paginator = PageNumberPagination()
-        paginated_users = paginator.paginate_queryset(users, request)
-        serializer = BlogListSerializer(paginated_users, many=True)
-        return paginator.get_paginated_response(serializer.data)
+    #def get(self, request, username):
+        #queryset = Post.objects.all()
+        #queryset = queryset.filter(user__username=username)
+        #if request.user.is_authenticated == False:
+        #    now = datetime.datetime.now()
+        #    queryset = queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
+        #paginator = PageNumberPagination()
+        #paginated_posts = paginator.paginate_queryset(queryset, request)
+        #serializer = PostListSerializer(paginated_posts, many=True)
+        #return paginator.get_paginated_response(serializer.data)
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        username_arg = self.kwargs.get('username')
+        queryset = queryset.filter(user__username=username_arg)
+        if self.request.user.is_authenticated and (self.request.user.username == username_arg or self.request.user.is_superuser):
+            return queryset
+        else:
+            now = datetime.datetime.now()
+            queryset = queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
+            return queryset
+
+
+    serializer_class = PostListSerializer
+#    permission_classes = (IsAdminUser,)
+
