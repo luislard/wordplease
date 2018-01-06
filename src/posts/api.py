@@ -17,14 +17,12 @@ from users.serializers import BlogListSerializer
 
 class PostsListAPI(ListCreateAPIView):
 
-    #queryset = Post.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = [IsAuthenticatedOrReadOnly] # esta clase hace que la lista este abierta pero la creacion no
 
     def get_queryset(self):
         now = datetime.datetime.now()
         user = self.request.user
-        #queryset = super(PostsListAPI, self).get_queryset()
         queryset = Post.objects.all()
         if user.is_authenticated and user.is_superuser:
             return queryset.order_by('-publication_date')
@@ -34,7 +32,6 @@ class PostsListAPI(ListCreateAPIView):
     def get_serializer_class(self):
         return PostListSerializer if self.request.method == "GET" else PostSerializer
 
-    # documentacion en http://www.django-rest-framework.org/api-guide/generic-views/
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

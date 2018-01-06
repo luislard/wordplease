@@ -42,4 +42,37 @@ Simply add the query_param **order_by**. Possible values are:
 [http://localhost:8000/api/1.0/blogs/\<username\>?order_by=title](http://localhost:8000/api/1.0/blogs/luis?order_by=title "User's Blog posts sorted by title in ascending order")
 
 
+### How to create a post
+
+You need to be authenticated to reach this endpoint.
+
+You will need the following Headers on your POST request:
+* **Content-Type:** application/json
+* **Authorization:** Token 4f5dbe4c76decf3eb187aea636fa68efd3855ef9
+
+Then, you will need to specify some Body in your request:
+
+```json
+{
+    "title": "Your title",
+    "image": "https://source.unsplash.com/random",
+    "summary": "The summary",
+    "body": "The body",
+    "publication_date": "2014-12-10",
+    "category":[1,2]
+}
+```
+
+Or
+
+```json
+{
+    "title": "Your title",
+    "video": "https://source.unsplash.com/random",
+    "summary": "The summary",
+    "body": "The body",
+    "publication_date": "2014-12-10",
+    "category":[1,2]
+}
+```
 
