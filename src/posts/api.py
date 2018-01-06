@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db.models import Q
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -73,20 +74,20 @@ class BlogUserListAPI(ListAPIView):
 
     authentication_classes = (TokenAuthentication,)
 
-    #def get(self, request, username):
-        #queryset = Post.objects.all()
-        #queryset = queryset.filter(user__username=username)
-        #if request.user.is_authenticated == False:
-        #    now = datetime.datetime.now()
-        #    queryset = queryset.filter(publication_date__lte=now.strftime("%Y-%m-%d"))
-        #paginator = PageNumberPagination()
-        #paginated_posts = paginator.paginate_queryset(queryset, request)
-        #serializer = PostListSerializer(paginated_posts, many=True)
-        #return paginator.get_paginated_response(serializer.data)
     def get_queryset(self):
         queryset = Post.objects.all()
         username_arg = self.kwargs.get('username')
         queryset = queryset.filter(user__username=username_arg)
+        search = self.request.query_params.get('search', None)
+        title = self.request.query_params.get('title', None)
+        body = self.request.query_params.get('body', None)
+        if search != None and title == None and body == None:
+            queryset = queryset.filter(Q(title__icontains=search) | Q(body__icontains=search))
+        if title != None:
+            queryset = queryset.filter(title__icontains=title)
+        if body != None:
+            queryset = queryset.filter(body__icontains=body)
+        queryset = queryset.filter()
         if self.request.user.is_authenticated and (self.request.user.username == username_arg or self.request.user.is_superuser):
             return queryset
         else:
