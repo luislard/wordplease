@@ -7,6 +7,7 @@
 ### How to register an user
 
 First register yourself in the application using the following route:
+<br/>
 **POST** [http://localhost:8000/api/1.0/users/](http://localhost:8000/api/1.0/users/)
 
 With some Body like:
@@ -109,10 +110,13 @@ Or
 ```
 
 Then you need to perform the request
-
+<br/>
 **POST** [http://localhost:8000/api/1.0/posts/](http://localhost:8000/api/1.0/posts/)
 
 
 ### How to retreive the detail of a post
-If you are authenticated you will see unpublished post if you are a superuser or if your tokens belongs to the post owner
+If you are not authenticated you will see only published posts.
+<br/>
+I you are authenticated and if you are a superuser or if you are the owner of the post you will see it even if the post is not published.
+<br/>
 **GET** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
