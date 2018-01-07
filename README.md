@@ -124,9 +124,9 @@ I you are authenticated and if you are a superuser or if you are the owner of th
 ### How to update post detail
 If you are not authenticated you cant update posts.
 <br/>
-I you are authenticated and if you are a superuser or if you are the owner of the post can update the post.
+If you are authenticated and if you are a superuser or if you are the owner of the post can update the post.
 <br/>
-To do the update do a **PUT** request with the Authorization Header and the corresponding body like the following example:
+To do the update do a **PUT** request with the **Authorization Header** and the corresponding **body** like the following example:
 
 **PUT** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
 
@@ -141,3 +141,11 @@ To do the update do a **PUT** request with the Authorization Header and the corr
 }
 ```
 
+### How to delete a post
+If you are not authenticated you cant delete posts.
+<br/>
+If you are authenticated and if you are a superuser or if you are the owner of the post can delete the post.
+<br/>
+To delete a post do a **DELETE** request with the **Authorization Header** like the following example:
+
+**DELETE** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
