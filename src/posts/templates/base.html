@@ -11,10 +11,11 @@
         <a href="{% url "home_page" %}">Home</a> |
         <a href="{% url "my_posts_page" %}">My Posts</a> |
         <a href="{% url "blogs_page" %}">Blogs</a> |
-        <a href="{% url "create_post_page" %}">New Post</a> |
+        <a href="{% url "create_post_page" %}">New Post</a> {% if not user.is_authenticated %} |
         <a href="{% url "signup_page" %}">Sign Up</a> |
-        <a href="{% url "login_page" %}">Login</a> |
+        <a href="{% url "login_page" %}">Login</a> {% endif %}{% if user.is_authenticated %} |
         <a href="{% url "logout_page" %}">Logout</a>
+        {% endif %}
     </div>
     <hr>
     {% block content %}

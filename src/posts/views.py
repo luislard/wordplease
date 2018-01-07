@@ -37,7 +37,7 @@ class MyPostsView(LoginRequiredMixin,ListView):
         return queryset.filter(user=self.request.user).order_by('-created_at')
 
 
-class UserPostView(LoginRequiredMixin,ListView):
+class UserPostView(ListView):
     model = Post
     template_name = "user_posts.html"
 
