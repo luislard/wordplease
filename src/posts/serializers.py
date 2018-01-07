@@ -18,3 +18,13 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+    def validate(self, data):
+        """
+        Check that image or video have something.
+        """
+        image = data.get('image', None)
+        video = data.get('video', None)
+        if (image == '' or image == None) and  (video == '' or video == None):
+            raise serializers.ValidationError("Image or video must be set.")
+        return data

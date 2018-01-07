@@ -33,7 +33,8 @@ class PostsListAPI(ListCreateAPIView):
         return PostListSerializer if self.request.method == "GET" else PostSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        if serializer.is_valid():
+            serializer.save(user=self.request.user)
 
 class PostDetailAPI(RetrieveUpdateDestroyAPIView):
     authentication_classes = (TokenAuthentication,)
