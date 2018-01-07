@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 class Category(models.Model):
 
@@ -35,4 +36,9 @@ class Post(models.Model):
         Devuelve la representación de un objeto como una string
         """
         return self.title
+
+    def clean(self):
+        # Don't allow empty image or video.
+        if (self.image == '' or self.image == None) and (self.video == '' or self.video == None):
+            raise ValidationError(_('You must set and image or video.'))
 
