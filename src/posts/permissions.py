@@ -15,4 +15,6 @@ class PostPermission(BasePermission):
             else:
                 if (obj.user == request.user) or request.user.is_superuser:
                     permission = True
+        elif (obj.user == request.user) or request.user.is_superuser:
+            permission = True
         return permission

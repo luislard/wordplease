@@ -109,14 +109,35 @@ Or
 }
 ```
 
-Then you need to perform the request
+Then you need to perform the request:
 <br/>
 **POST** [http://localhost:8000/api/1.0/posts/](http://localhost:8000/api/1.0/posts/)
 
 
-### How to retreive the detail of a post
+### How to retreive post detail
 If you are not authenticated you will see only published posts.
 <br/>
 I you are authenticated and if you are a superuser or if you are the owner of the post you will see it even if the post is not published.
 <br/>
 **GET** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
+
+### How to update post detail
+If you are not authenticated you cant update posts.
+<br/>
+I you are authenticated and if you are a superuser or if you are the owner of the post can update the post.
+<br/>
+To do the update do a **PUT** request with the Authorization Header and the corresponding body like the following example:
+
+**PUT** [http://localhost:8000/api/1.0/posts/\<id\>](http://localhost:8000/api/1.0/posts/\<id\>)
+
+```json
+{
+    "title": "Your title",
+    "image": "https://source.unsplash.com/random",
+    "summary": "The summary",
+    "body": "The body",
+    "publication_date": "2014-12-10",
+    "category":[1,2]
+}
+```
+
