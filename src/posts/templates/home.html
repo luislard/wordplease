@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block head_title %} My Posts {% endblock %}
+{% block stylesheets %} {{ block.super }} {% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>All Posts</h1>
@@ -10,3 +12,5 @@
     </div>
 </div>
 {% endblock %}
+
+{% block javascripts %} {{ block.super }} {% endblock %}

@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block head_title %} Wordplease | {{ object.title }} {% endblock %}
+
+{% block stylesheets %}
+    <link href="{% static 'css/detail.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <div class="row">
-        {% include 'post_detail.html' with post=object %}
-    </div>
+    <section class="article-detail ideal">
+        <div class="ui-status ideal">
+            {% include 'post_detail.html' with post=object %}
+        </div>
+
+    </section>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+
 {% endblock %}
