@@ -1,12 +1,43 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
+{% block stylesheets %}
+<link href="{% static 'css/main.css' %}" rel="stylesheet">
+{% endblock %}
 {% block head_title %} My Posts {% endblock %}
 {% block content %}
 <div class="container">
-    <h1>{{ request.user|capfirst }} Posts</h1>
-    <hr>
-    <div class="row">
-        {% include 'posts_list.html' with posts=object_list %}
-    </div>
+    <section class="article-list ideal" id="list-container">
+        <div class="ui-status ideal">
+            <h1>{{ request.user|capfirst }} Posts</h1>
+            <div class="row">
+                {% include 'posts_list.html' with posts=object_list %}
+            </div>
+            <div class="row">
+                <div class="pagination-container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 {% endblock %}

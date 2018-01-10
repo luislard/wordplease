@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block head_title %} My Posts {% endblock %}
+
 {% block stylesheets %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% endblock %}
-
+{% block head_title %} My Posts {% endblock %}
 {% block content %}
 <div class="container">
     <section class="article-list ideal" id="list-container">
