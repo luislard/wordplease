@@ -10,14 +10,18 @@
             </button>
             <button type="button" class="search-button navbar-toggle"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             <input type="search" name="search" value="" class="search-input navbar-toggle">
-            <a class="navbar-brand" href="#">OnTopic</a>
+            <a class="navbar-brand" href="{% url "home_page" %}">WordPlease</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class=""><a href="#">Log In<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Register</a></li>
+                {% if not user.is_authenticated %}
+                <li class=""><a href="{% url "login_page" %}">Log In<span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url "signup_page" %}">Register</a></li>
+                {% else %}
+                <li><a href="{% url "signup_page" %}">Logout</a></li>
+                {% endif %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
                     <ul class="dropdown-menu">

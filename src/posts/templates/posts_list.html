@@ -1,21 +1,32 @@
+{% load staticfiles %}
 {% for post in posts %}
 
-    <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="border border-primary">
-
-
-            <h2><a href="{% url 'post_detail_page' username=post.user.username pk=post.id %}">{{ post.title }}</a></h2>
-            <p>Published at: {{ post.publication_date|date }}</p>
-            {% if request.user == post.user %}
-                <p>Created at: {{ post.created_at|date }}</p>
-            {% endif %}
-
-                <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid">
-
-            <h3>Summary</h3>
-            <p>{{ post.summary|truncatechars:50 }}</p>
+    <article class="col-xs-12 col-sm-6 col-md-4 article" data-id="{{ post.id }}">
+        <div class="article-wrapper">
+            <img src="{{post.image}}" alt="{{post.title}}" class="article-img">
+            <div class="article-stats">
+                <div class="published-time">Published: <span class="text">{{post.published_at|date}}</span></div>
+                <div class="stats-buttons">
+                    <div class="msg-count"><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> <span class="count">3</span></div>
+                    <div class="fav-count ${likedClass}"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> <span class="count">5</span></div>
+                    <div class="share-icon"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></div>
+                </div>
+            </div>
+            <header class="article-title"><a href="#">{{post.title}}</a></header>
+            <p class="short-desc">{{post.summary}}</p>
+            <div class="article-author">
+                <div class="wrapper">
+                    <div class="author-img-container">
+                        <img src="{% static 'img/author.jpeg' %}" alt="{{post.user.username|capfirst}}" class="article-author-img">
+                    </div>
+                    <div class="author-text-container">
+                        <div class="label">About the author:</div>
+                        <div class="author-name">{{post.user.username|capfirst}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </article>
 
 
 {% endfor %}
