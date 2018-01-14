@@ -1,5 +1,10 @@
 # Wordplease
 
+## To the teacher
+
+1. Thanks for your classes.
+2. Optional tasks can be found in development branch.
+
 ## API usage
 
 **Note: Some endpoints require authentication.**
