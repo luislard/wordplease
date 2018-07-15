@@ -24,6 +24,7 @@ class Post(models.Model):
     publication_date = models.DateTimeField()
     image = models.URLField(blank=True)
     video = models.URLField(blank=True)
+    price = models.IntegerField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True) # set date when object is created
     modified_at = models.DateTimeField(auto_now=True)  # saves the date when the object is updated

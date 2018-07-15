@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'rangefilter',
 ]
 
 MIDDLEWARE = [
